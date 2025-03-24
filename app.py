@@ -2,8 +2,8 @@ import streamlit as st
 from track_3_stream import process_excel  # Import your function
 
 # Streamlit UI
-st.title("Track 3 Excel Workbook Analyzer")
-st.write("Upload an Excel file, analyze it, and download the processed version.")
+st.title("Track 3 Report Analyzer")
+st.write("Hey you😃, please upload your Excel file and download the processed version.")
 
 # Upload file button
 uploaded_file = st.file_uploader("Choose an Excel file", type=["xlsx", "xls"])
