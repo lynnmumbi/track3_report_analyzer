@@ -453,10 +453,35 @@ def process_excel(file_path):
 
     # Rows to color - start from row 14 (after headers), or your desired start row
     table_start_row = 14
-    table_end_row = utilization_sheet.max_row - 1  # Exclude last row if it's totals
+    table_end_row = utilization_sheet.max_row 
 
 
-    # Apply color coding based on logic you want
+    # Identify the column index for 'Total Distance (km)' (replace with the correct column name if different)
+total_distance_col_index = None
+for col in range(1, utilization_sheet.max_column + 1):
+    if utilization_sheet.cell(row=13, column=col).value == "Total Distance (km)":
+        total_distance_col_index = col
+        break
+
+# Ensure we found the column
+if total_distance_col_index is None:
+    raise ValueError("Column 'Total Distance (km)' not found.")
+
+# Insert a new row for Totals
+totals_row = table_end_row  + 1
+utilization_sheet.insert_rows(totals_row)
+
+# Label the first cell in the totals row
+utilization_sheet.cell(row=totals_row, column=1, value="Totals").font = Font(bold=True)
+
+# Sum each column from row 14 to the last data row
+for col in range(2, total_distance_col_index + 1):  # Start from col 2 to exclude labels
+    col_letter = get_column_letter(col)
+    sum_formula = f"=SUM({col_letter}{table_start_row}:{col_letter}{table_end_row })"
+    utilization_sheet.cell(row=totals_row, column=col, value=sum_formula).font = Font(bold=True)
+
+
+    # Apply color coding based 
 
     for row in utilization_sheet.iter_rows(min_row=table_start_row, max_row=table_end_row,
                                            min_col=table_start_col, max_col=table_end_col):
