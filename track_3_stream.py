@@ -451,9 +451,6 @@ def process_excel(file_path):
     table_start_col = 1
     table_end_col = weekday_distance_col_index - 1
 
-    # Rows to color - start from row 14 (after headers), or your desired start row
-    table_start_row = 14
-    table_end_row = utilization_sheet.max_row
 
     # Rows to color - start from row 14 (after headers), or your desired start row
     table_start_row = 14
