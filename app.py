@@ -1,5 +1,10 @@
 import streamlit as st
 from track_3_stream import process_excel  # Import your function
+import os
+
+GITHUB_TOKEN = os.getenv("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")
+repo_url =  f"https://{GITHUB_TOKEN}@github.com/lynnmumbi/track3_report_analyzer.git"
+
 
 # Streamlit UI
 st.title("Track 3 Report Analyzer")
